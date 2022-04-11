@@ -1,0 +1,58 @@
+﻿@model Chemical_Management.Models.Assay
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Assay</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AssayId" class="control-label"></label>
+                <input asp-for="AssayId" class="form-control" />
+                <span asp-validation-for="AssayId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AssayName" class="control-label"></label>
+                <input asp-for="AssayName" class="form-control" />
+                <span asp-validation-for="AssayName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AssayDate" class="control-label"></label>
+                <input asp-for="AssayDate" class="form-control" />
+                <span asp-validation-for="AssayDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnalystID" class="control-label"></label>
+                <input asp-for="AnalystID" class="form-control" />
+                <span asp-validation-for="AnalystID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReagentIdA" class="control-label"></label>
+                <input asp-for="ReagentIdA" class="form-control" />
+                <span asp-validation-for="ReagentIdA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReagentIdB" class="control-label"></label>
+                <input asp-for="ReagentIdB" class="form-control" />
+                <span asp-validation-for="ReagentIdB" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
