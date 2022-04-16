@@ -1,4 +1,10 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Chemical_Management.Data;
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<LabUserContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Chemical_ManagementContext") ));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
