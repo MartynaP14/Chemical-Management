@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace Chemical_Management.Models
+
+    
 {
     public class Assay
     {
