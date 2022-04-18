@@ -16,6 +16,16 @@ namespace Chemical_Management.Models
         public string Name { get; set; } = string.Empty;
         [Required(ErrorMessage ="User Permissions Required")]
         public Permissions Permissions { get; set; }
+
+
+        //Navigation properties for entity framework, to define relationships between tables
+        //FK for entity framework
+
+        //Many assays to one lab analyst
+        public List<Assay> Assays { get; set; } 
+
+        //Many reagents to one lab analyst
+        public List<Reagent> Reagents { get; set; }
         
     }
 }
