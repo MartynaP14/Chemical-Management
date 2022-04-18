@@ -17,8 +17,19 @@ namespace Chemical_Management.Models
         [Required(ErrorMessage = "Please enter Reagent Location")]
         public string Location { get; set; }
 
-        [Required(ErrorMessage = "Please enter ID of Lab Analyst")] //foreign key 
-        public string AnalystID { get; set; }
+        //[Required(ErrorMessage = "Please enter ID of Lab Analyst")] //foreign key 
+        //public string AnalystID { get; set; }
+
+        //Navigation properties for entity framework, to define relationships between tables
+        //FK for entity framework
+
+        // one lab analyst to many reagents 
+        public int UserID { get; set; }
+        public LabAnalyst LabAnalyst { get; set; }
+
+        // one assay to many reagents 
+        public int AssayID { get; set; }
+        public Assay Assay { get; set; }
 
     }
 }
