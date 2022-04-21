@@ -29,10 +29,16 @@
             @Html.DisplayFor(model => model.Location)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AnalystID)
+            @Html.DisplayNameFor(model => model.UserID)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AnalystID)
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Assay)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Assay.AssayName)
         </dd>
     </dl>
 </div>

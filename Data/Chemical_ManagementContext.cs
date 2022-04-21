@@ -15,5 +15,6 @@ namespace Chemical_Management.Data
         }
         public DbSet<Chemical_Management.Models.LabAnalyst> LabAnalyst { get; set; }
         public DbSet<Chemical_Management.Models.Reagent> Reagent { get; set; }
+        public DbSet<Chemical_Management.Models.Assay> Assay { get; set; }
     }
 }
