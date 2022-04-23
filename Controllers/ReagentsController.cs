@@ -10,86 +10,92 @@ using Chemical_Management.Models;
 
 namespace Chemical_Management.Controllers
 {
-    public class LabAnalystController : Controller
+    public class ReagentsController : Controller
     {
         private readonly LabUserContext _context;
 
-        public LabAnalystController(LabUserContext context)
+        public ReagentsController(LabUserContext context)
         {
             _context = context;
+            //_context.Database.EnsureDeleted(); //added during model changes to ensure updates won't crash db
             _context.Database.EnsureCreated();
         }
 
-        // GET: LabAnalyst
+        // GET: Reagents
         public async Task<IActionResult> Index()
         {
-            return View(await _context.LabAnalyst.ToListAsync());
+            var labUserContext = _context.Reagent.Include(r => r.Assay);
+            return View(await labUserContext.ToListAsync());
         }
 
-        // GET: LabAnalyst/Details/5
-        public async Task<IActionResult> Details(string id)
+        // GET: Reagents/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var labAnalyst = await _context.LabAnalyst
-                .FirstOrDefaultAsync(m => m.UserID == id);
-            if (labAnalyst == null)
+            var reagent = await _context.Reagent
+                .Include(r => r.Assay)
+                .FirstOrDefaultAsync(m => m.ReagentID == id);
+            if (reagent == null)
             {
                 return NotFound();
             }
 
-            return View(labAnalyst);
+            return View(reagent);
         }
 
-        // GET: LabAnalyst/Create
+        // GET: Reagents/Create
         public IActionResult Create()
         {
+            ViewData["AssayID"] = new SelectList(_context.Assay, "AssayId", "AssayName");
             return View();
         }
 
-        // POST: LabAnalyst/Create
+        // POST: Reagents/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserID,Name,Permissions")] LabAnalyst labAnalyst)
+        public async Task<IActionResult> Create([Bind("ReagentID,ReagentName,NumberOfVials,Location,UserID,AssayID")] Reagent reagent)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(labAnalyst);
+                _context.Add(reagent);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(labAnalyst);
+            ViewData["AssayID"] = new SelectList(_context.Assay, "AssayId", "AssayName", reagent.AssayID);
+            return View(reagent);
         }
 
-        // GET: LabAnalyst/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        // GET: Reagents/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var labAnalyst = await _context.LabAnalyst.FindAsync(id);
-            if (labAnalyst == null)
+            var reagent = await _context.Reagent.FindAsync(id);
+            if (reagent == null)
             {
                 return NotFound();
             }
-            return View(labAnalyst);
+            ViewData["AssayID"] = new SelectList(_context.Assay, "AssayId", "AssayName", reagent.AssayID);
+            return View(reagent);
         }
 
-        // POST: LabAnalyst/Edit/5
+        // POST: Reagents/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("UserID,Name,Permissions")] LabAnalyst labAnalyst)
+        public async Task<IActionResult> Edit(int id, [Bind("ReagentID,ReagentName,NumberOfVials,Location,UserID,AssayID")] Reagent reagent)
         {
-            if (id != labAnalyst.UserID)
+            if (id != reagent.ReagentID)
             {
                 return NotFound();
             }
@@ -98,12 +104,12 @@ namespace Chemical_Management.Controllers
             {
                 try
                 {
-                    _context.Update(labAnalyst);
+                    _context.Update(reagent);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LabAnalystExists(labAnalyst.UserID))
+                    if (!ReagentExists(reagent.ReagentID))
                     {
                         return NotFound();
                     }
@@ -114,41 +120,43 @@ namespace Chemical_Management.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(labAnalyst);
+            ViewData["AssayID"] = new SelectList(_context.Assay, "AssayId", "AssayName", reagent.AssayID);
+            return View(reagent);
         }
 
-        // GET: LabAnalyst/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        // GET: Reagents/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var labAnalyst = await _context.LabAnalyst
-                .FirstOrDefaultAsync(m => m.UserID == id);
-            if (labAnalyst == null)
+            var reagent = await _context.Reagent
+                .Include(r => r.Assay)
+                .FirstOrDefaultAsync(m => m.ReagentID == id);
+            if (reagent == null)
             {
                 return NotFound();
             }
 
-            return View(labAnalyst);
+            return View(reagent);
         }
 
-        // POST: LabAnalyst/Delete/5
+        // POST: Reagents/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var labAnalyst = await _context.LabAnalyst.FindAsync(id);
-            _context.LabAnalyst.Remove(labAnalyst);
+            var reagent = await _context.Reagent.FindAsync(id);
+            _context.Reagent.Remove(reagent);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool LabAnalystExists(string id)
+        private bool ReagentExists(int id)
         {
-            return _context.LabAnalyst.Any(e => e.UserID == id);
+            return _context.Reagent.Any(e => e.ReagentID == id);
         }
     }
 }

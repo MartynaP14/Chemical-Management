@@ -22,7 +22,10 @@
                 @Html.DisplayNameFor(model => model.Location)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AnalystID)
+                @Html.DisplayNameFor(model => model.UserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Assay)
             </th>
             <th></th>
         </tr>
@@ -40,12 +43,16 @@
                 @Html.DisplayFor(modelItem => item.Location)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AnalystID)
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Assay.AssayName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ReagentID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ReagentID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.ReagentID">Delete</a>
+                
             </td>
         </tr>
 }
