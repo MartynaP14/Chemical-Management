@@ -1,0 +1,42 @@
+﻿@model Chemical_Management.Models.Reagent
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Reagent</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ReagentName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ReagentName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LotNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LotNumber)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Vendor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Vendor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Reagent_Type)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Reagent_Type)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ReagentID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

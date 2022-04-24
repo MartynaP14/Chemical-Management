@@ -12,6 +12,7 @@ namespace Chemical_Management.Models
         public int LabID { get; set; } //FK to tie Lab reference in supply class (needed to see what labs have certain stocks)
         public int ReagentStock { get; set; }
 
+        //Navigation
         public virtual Reagent Reagent { get; set; }
         public virtual Lab Lab { get; set; }
 

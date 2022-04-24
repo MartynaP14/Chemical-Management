@@ -7,12 +7,17 @@ using Chemical_Management.Models;
 
 namespace Chemical_Management.Data
 {
-    public class LabUserContext : DbContext
+    public class Chemical_ManagementContext : DbContext
     {
-        public LabUserContext (DbContextOptions<LabUserContext> options)
+        public Chemical_ManagementContext (DbContextOptions<Chemical_ManagementContext> options)
             : base(options)
         {
         }
-        
+
+        public DbSet<Chemical_Management.Models.Reagent> Reagent { get; set; }
+
+        public DbSet<Chemical_Management.Models.Lab> Lab { get; set; }
+
+        public DbSet<Chemical_Management.Models.Supply> Supply { get; set; }
     }
 }

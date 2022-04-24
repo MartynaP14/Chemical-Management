@@ -1,0 +1,48 @@
+﻿@model Chemical_Management.Models.Reagent
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Reagent</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ReagentName" class="control-label"></label>
+                <input asp-for="ReagentName" class="form-control" />
+                <span asp-validation-for="ReagentName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LotNumber" class="control-label"></label>
+                <input asp-for="LotNumber" class="form-control" />
+                <span asp-validation-for="LotNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vendor" class="control-label"></label>
+                <input asp-for="Vendor" class="form-control" />
+                <span asp-validation-for="Vendor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reagent_Type" class="control-label"></label>
+                <select asp-for="Reagent_Type" class="form-control" asp-items="@Html.GetEnumSelectList<Reagent_Type>()"></select>
+                <span asp-validation-for="Reagent_Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -2,10 +2,15 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.DependencyInjection;
 using Chemical_Management.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<LabUserContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Chemical_ManagementContext") ));
+builder.Services.AddDbContext<Chemical_ManagementContext>(options =>
+
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseMat") ?? throw new InvalidOperationException("Connection string 'Chemical_ManagementContext' not found.")));
+
+///builder.Services.AddDbContext<LabUserContext>(options =>
+    ///options.UseSqlServer(builder.Configuration.GetConnectionString("Mat_mag") ));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
