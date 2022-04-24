@@ -1,0 +1,36 @@
+﻿@model Chemical_Management.Models.Supply
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Supply</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ReagnetNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ReagnetNumber)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Reagent)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Reagent.ReagentName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Lab)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Lab.LabName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.SupplyId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

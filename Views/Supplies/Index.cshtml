@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Chemical_Management.Models.Supply>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ReagnetNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reagent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lab)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReagnetNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reagent.ReagentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lab.LabName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SupplyId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SupplyId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SupplyId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
