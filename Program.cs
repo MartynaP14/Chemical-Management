@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.DependencyInjection;
 using Chemical_Management.Data;
 
@@ -14,6 +15,11 @@ builder.Services.AddDbContext<Chemical_ManagementContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options => {
+        options.LoginPath = "/login";
+        });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,7 +31,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+
+app.UseAuthentication(); //needs to be ahead of authorization for cookie creations
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",
