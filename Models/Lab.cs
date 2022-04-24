@@ -15,7 +15,7 @@ namespace Chemical_Management.Models
         [Display(Name ="Site the lab belongs to")]
         public string LabSite { get; set; }
 
-        public virtual ICollection<Supply> Supplies { get; set; }
+        public virtual ICollection<Supply> Supplies { get; set; } //represents many side of the lab to supply relationships
 
     }
 }

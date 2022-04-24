@@ -13,7 +13,6 @@ namespace Chemical_Management.Data
             : base(options)
         {
         }
-        public DbSet<Chemical_Management.Models.LabAnalyst> LabAnalyst { get; set; }
-        public DbSet<Chemical_Management.Models.Reagent> Reagent { get; set; }
+        
     }
 }
