@@ -10,22 +10,24 @@ using Chemical_Management.Models;
 
 namespace Chemical_Management.Controllers
 {
-    public class ReagentController : Controller
+    public class SuppliesController : Controller
     {
-        private readonly LabUserContext _context;
+        private readonly Chemical_ManagementContext _context;
 
-        public ReagentController(LabUserContext context)
+        public SuppliesController(Chemical_ManagementContext context)
         {
             _context = context;
+
         }
 
-        // GET: Reagent
+        // GET: Supplies
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Reagent.ToListAsync());
+            var chemical_ManagementContext = _context.Supply.Include(s => s.Lab).Include(s => s.Reagent);
+            return View(await chemical_ManagementContext.ToListAsync());
         }
 
-        // GET: Reagent/Details/5
+        // GET: Supplies/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +35,45 @@ namespace Chemical_Management.Controllers
                 return NotFound();
             }
 
-            var reagent = await _context.Reagent
-                .FirstOrDefaultAsync(m => m.ReagentID == id);
-            if (reagent == null)
+            var supply = await _context.Supply
+                .Include(s => s.Lab)
+                .Include(s => s.Reagent)
+                .FirstOrDefaultAsync(m => m.SupplyId == id);
+            if (supply == null)
             {
                 return NotFound();
             }
 
-            return View(reagent);
+            return View(supply);
         }
 
-        // GET: Reagent/Create
+        // GET: Supplies/Create
         public IActionResult Create()
         {
+            ViewData["LabID"] = new SelectList(_context.Lab, "LabID", "LabName");
+            ViewData["ReagentId"] = new SelectList(_context.Reagent, "ReagentID", "ReagentName");
             return View();
         }
 
-        // POST: Reagent/Create
+        // POST: Supplies/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReagentID,ReagentName,NumberOfVials,Location,AnalystID")] Reagent reagent)
+        public async Task<IActionResult> Create([Bind("SupplyId,ReagentId,LabID,ReagnetNumber")] Supply supply)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(reagent);
+                _context.Add(supply);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(reagent);
+            ViewData["LabID"] = new SelectList(_context.Lab, "LabID", "LabName", supply.LabID);
+            ViewData["ReagentId"] = new SelectList(_context.Reagent, "ReagentID", "ReagentName", supply.ReagentId);
+            return View(supply);
         }
 
-        // GET: Reagent/Edit/5
+        // GET: Supplies/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +81,24 @@ namespace Chemical_Management.Controllers
                 return NotFound();
             }
 
-            var reagent = await _context.Reagent.FindAsync(id);
-            if (reagent == null)
+            var supply = await _context.Supply.FindAsync(id);
+            if (supply == null)
             {
                 return NotFound();
             }
-            return View(reagent);
+            ViewData["LabID"] = new SelectList(_context.Lab, "LabID", "LabName", supply.LabID);
+            ViewData["ReagentId"] = new SelectList(_context.Reagent, "ReagentID", "ReagentName", supply.ReagentId);
+            return View(supply);
         }
 
-        // POST: Reagent/Edit/5
+        // POST: Supplies/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReagentID,ReagentName,NumberOfVials,Location,AnalystID")] Reagent reagent)
+        public async Task<IActionResult> Edit(int id, [Bind("SupplyId,ReagentId,LabID,ReagnetNumber")] Supply supply)
         {
-            if (id != reagent.ReagentID)
+            if (id != supply.SupplyId)
             {
                 return NotFound();
             }
@@ -97,12 +107,12 @@ namespace Chemical_Management.Controllers
             {
                 try
                 {
-                    _context.Update(reagent);
+                    _context.Update(supply);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ReagentExists(reagent.ReagentID))
+                    if (!SupplyExists(supply.SupplyId))
                     {
                         return NotFound();
                     }
@@ -113,10 +123,12 @@ namespace Chemical_Management.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(reagent);
+            ViewData["LabID"] = new SelectList(_context.Lab, "LabID", "LabName", supply.LabID);
+            ViewData["ReagentId"] = new SelectList(_context.Reagent, "ReagentID", "ReagentName", supply.ReagentId);
+            return View(supply);
         }
 
-        // GET: Reagent/Delete/5
+        // GET: Supplies/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +136,32 @@ namespace Chemical_Management.Controllers
                 return NotFound();
             }
 
-            var reagent = await _context.Reagent
-                .FirstOrDefaultAsync(m => m.ReagentID == id);
-            if (reagent == null)
+            var supply = await _context.Supply
+                .Include(s => s.Lab)
+                .Include(s => s.Reagent)
+                .FirstOrDefaultAsync(m => m.SupplyId == id);
+            if (supply == null)
             {
                 return NotFound();
             }
 
-            return View(reagent);
+            return View(supply);
         }
 
-        // POST: Reagent/Delete/5
+        // POST: Supplies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var reagent = await _context.Reagent.FindAsync(id);
-            _context.Reagent.Remove(reagent);
+            var supply = await _context.Supply.FindAsync(id);
+            _context.Supply.Remove(supply);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ReagentExists(int id)
+        private bool SupplyExists(int id)
         {
-            return _context.Reagent.Any(e => e.ReagentID == id);
+            return _context.Supply.Any(e => e.SupplyId == id);
         }
     }
 }

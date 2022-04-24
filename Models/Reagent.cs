@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Chemical_Management.Models
 {
-    public enum ReagentType { Organic, Inorganic, Acid, Base, Corrosive, Toxic }
+    public enum Reagent_Type { Organic, Inorganic, Acid, Base, Corrosive, Toxic }
     public class Reagent
     { 
         [Key]
@@ -18,7 +18,7 @@ namespace Chemical_Management.Models
         public string Vendor { get; set; }
 
         [Required(ErrorMessage = "Reagent type field is required")]
-        public ReagentType Reagent_Type { get; set; }
+        public Reagent_Type Reagent_Type { get; set; }
 
         public virtual ICollection<Supply> Supplies { get; set; }
 
