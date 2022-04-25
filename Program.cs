@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<Chemical_ManagementContext>(options =>
 
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseMat") ?? throw new InvalidOperationException("Connection string 'Chemical_ManagementContext' not found.")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Chemical_ManagementContext") ?? throw new InvalidOperationException("Connection string 'Chemical_ManagementContext' not found.")));
 
 ///builder.Services.AddDbContext<LabUserContext>(options =>
     ///options.UseSqlServer(builder.Configuration.GetConnectionString("Mat_mag") ));
