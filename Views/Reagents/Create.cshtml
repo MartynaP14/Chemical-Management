@@ -8,27 +8,33 @@
 
 <h4>Reagent</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ReagentName" class="control-label"></label>
-                <input asp-for="ReagentName" class="form-control" />
-                <span asp-validation-for="ReagentName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LotNumber" class="control-label"></label>
-                <input asp-for="LotNumber" class="form-control" />
-                <span asp-validation-for="LotNumber" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="ReagentName" class="control-label"></label>
+                    <input asp-for="ReagentName" class="form-control" />
+                    <span asp-validation-for="ReagentName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LotNumber" class="control-label"></label>
+                    <input asp-for="LotNumber" class="form-control" />
+                    <span asp-validation-for="LotNumber" class="text-danger"></span>
+                </div>
+                @if (User.Identity.IsAuthenticated) //only display to user when logged in
+            {
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            }
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <h6><i>Please log-in to create Reagent</i></h6>
+            }
         </form>
+        </div>
     </div>
-</div>
 
 <div>
     <a asp-action="Index">Back to List</a>

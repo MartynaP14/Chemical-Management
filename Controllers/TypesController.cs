@@ -12,7 +12,142 @@ namespace Chemical_Management.Controllers
 {
     public class TypesController : Controller
     {
-        //nothing added because current context only understand the old data model and is throwing errors for reagent type and vendor properies in reagents,
-        //error CS1061: 'Supply' does not contain a definition for 'ReagnetNumber' -> old property name now called reagent stock
+        private readonly Chemical_ManagementContext _context;
+
+        public TypesController(Chemical_ManagementContext context)
+        {
+            _context = context;
+        }
+
+        // GET: Types
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Type.ToListAsync());
+        }
+
+        // GET: Types/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var @type = await _context.Type
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (@type == null)
+            {
+                return NotFound();
+            }
+
+            return View(@type);
+        }
+
+        // GET: Types/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Types/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Reagent_Type")] Models.Type @type)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(@type);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(@type);
+        }
+
+        // GET: Types/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var @type = await _context.Type.FindAsync(id);
+            if (@type == null)
+            {
+                return NotFound();
+            }
+            return View(@type);
+        }
+
+        // POST: Types/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Reagent_Type")] Models.Type @type)
+        {
+            if (id != @type.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(@type);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!TypeExists(@type.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(@type);
+        }
+
+        // GET: Types/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var @type = await _context.Type
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (@type == null)
+            {
+                return NotFound();
+            }
+
+            return View(@type);
+        }
+
+        // POST: Types/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var @type = await _context.Type.FindAsync(id);
+            _context.Type.Remove(@type);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool TypeExists(int id)
+        {
+            return _context.Type.Any(e => e.Id == id);
+        }
     }
 }

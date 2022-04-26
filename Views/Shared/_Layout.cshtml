@@ -34,6 +34,37 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
                             </li>
                         }
+                        
+                        @if (User.Identity.IsAuthenticated) //only display to user when logged in
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Labs" asp-action="Index">Show Labs</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated) //only display to user when logged in
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Reagents" asp-action="Index">Show Reagents</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated) //only display to user when logged in
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Supplies" asp-action="Index">Show Supply</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated) //only display to user when logged in
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Types" asp-action="Index">Show Reagent Types</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated) //only display to user when logged in
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">User Management</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

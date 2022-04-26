@@ -10,6 +10,13 @@ namespace Chemical_Management.Controllers
 {
     public class HomeController : Controller
     {
+        private static List<Users> _AppUsers //will move to db soon
+            = new List<Users>() {
+            new Users { UserName = "Johnny", Password = "EAD2022", Id = 1, UserType = UserType.Admin},
+            new Users { UserName = "Martyna", Password = "MARTYNA", Id = 2, UserType = UserType.Admin},
+            new Users { UserName = "StandardUser", Password = "TestUser", Id = 3, UserType = UserType.Standard},
+            };
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -33,22 +40,25 @@ namespace Chemical_Management.Controllers
             return View();
         }
 
-        [HttpGet("Login")] //returns login page
+        [HttpGet("Login")] 
         public IActionResult Login(string returnURL)
         {
-            ViewData["ReturnURL"] = returnURL;
+            ViewData["ReturnURL"] = returnURL; //returns login page 
             return View();
         }
 
         [HttpPost("login")] //posts login data for cookie based auth
         public async Task<IActionResult> Validate(string username, string password, string returnURL)
         {
-            if(username == "Johnny" && password == "Summer2022")
+            ViewData["ReturnUrl"] = returnURL;
+            bool enter = _AppUsers.Where(x => x.UserName == username && x.Password == password).Any();
+            if(enter == true)
             {
-                ViewData["ReturnUrl"] = returnURL;
+                //ViewData["ReturnUrl"] = returnURL;
                 var claims = new List<Claim>();
                 claims.Add(new Claim("username", username));  
                 claims.Add(new Claim(ClaimTypes.NameIdentifier, username));
+                
                 var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var claimsPrincipal = new ClaimsPrincipal(claimIdentity);
                 await HttpContext.SignInAsync(claimsPrincipal);

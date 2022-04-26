@@ -8,26 +8,28 @@ using Microsoft.EntityFrameworkCore;
 using Chemical_Management.Data;
 using Chemical_Management.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Chemical_Management.Controllers
 {
-    public class ReagentsController : Controller
+    public class UsersController : Controller
     {
+      
         private readonly Chemical_ManagementContext _context;
 
-        public ReagentsController(Chemical_ManagementContext context)
+        public UsersController(Chemical_ManagementContext context)
         {
             _context = context;
-            _context.Database.EnsureCreated();
         }
 
-        // GET: Reagents
+        // GET: Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Reagent.ToListAsync());
+            return View(await _context.Users.ToListAsync());
         }
 
-        // GET: Reagents/Details/5
+        // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,40 +37,40 @@ namespace Chemical_Management.Controllers
                 return NotFound();
             }
 
-            var reagent = await _context.Reagent
-                .FirstOrDefaultAsync(m => m.ReagentID == id);
-            if (reagent == null)
+            var users = await _context.Users
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (users == null)
             {
                 return NotFound();
             }
 
-            return View(reagent);
+            return View(users);
         }
-
-        // GET: Reagents/Create
+        
+        // GET: Users/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        [Authorize]
-        // POST: Reagents/Create
+        // POST: Users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReagentID,ReagentName,LotNumber")] Reagent reagent)
+        public async Task<IActionResult> Create([Bind("Id,UserName,UserType")] Users users)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(reagent);
+                _context.Add(users);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(reagent);
+            return View(users);
         }
 
-        // GET: Reagents/Edit/5
+        // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,22 +78,22 @@ namespace Chemical_Management.Controllers
                 return NotFound();
             }
 
-            var reagent = await _context.Reagent.FindAsync(id);
-            if (reagent == null)
+            var users = await _context.Users.FindAsync(id);
+            if (users == null)
             {
                 return NotFound();
             }
-            return View(reagent);
+            return View(users);
         }
 
-        // POST: Reagents/Edit/5
+        // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReagentID,ReagentName,LotNumber")] Reagent reagent)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserName,UserType")] Users users)
         {
-            if (id != reagent.ReagentID)
+            if (id != users.Id)
             {
                 return NotFound();
             }
@@ -100,12 +102,12 @@ namespace Chemical_Management.Controllers
             {
                 try
                 {
-                    _context.Update(reagent);
+                    _context.Update(users);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ReagentExists(reagent.ReagentID))
+                    if (!UsersExists(users.Id))
                     {
                         return NotFound();
                     }
@@ -116,10 +118,10 @@ namespace Chemical_Management.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(reagent);
+            return View(users);
         }
 
-        // GET: Reagents/Delete/5
+        // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -127,30 +129,30 @@ namespace Chemical_Management.Controllers
                 return NotFound();
             }
 
-            var reagent = await _context.Reagent
-                .FirstOrDefaultAsync(m => m.ReagentID == id);
-            if (reagent == null)
+            var users = await _context.Users
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (users == null)
             {
                 return NotFound();
             }
 
-            return View(reagent);
+            return View(users);
         }
 
-        // POST: Reagents/Delete/5
+        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var reagent = await _context.Reagent.FindAsync(id);
-            _context.Reagent.Remove(reagent);
+            var users = await _context.Users.FindAsync(id);
+            _context.Users.Remove(users);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ReagentExists(int id)
+        private bool UsersExists(int id)
         {
-            return _context.Reagent.Any(e => e.ReagentID == id);
+            return _context.Users.Any(e => e.Id == id);
         }
     }
 }
