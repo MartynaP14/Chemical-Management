@@ -18,12 +18,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.LotNumber)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Vendor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reagent_Type)
-            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -36,12 +31,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.LotNumber)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vendor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Reagent_Type)
-            </td>
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ReagentID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ReagentID">Details</a> |
