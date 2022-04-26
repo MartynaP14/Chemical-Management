@@ -6,7 +6,6 @@ using Chemical_Management.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<Chemical_ManagementContext>(options =>
-
     options.UseSqlServer(builder.Configuration.GetConnectionString("Chemical_ManagementContext") ?? throw new InvalidOperationException("Connection string 'Chemical_ManagementContext' not found.")));
 
 ///builder.Services.AddDbContext<LabUserContext>(options =>
