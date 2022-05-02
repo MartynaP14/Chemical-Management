@@ -19,9 +19,21 @@ namespace Chemical_Management.Controllers
             _context = context;
         }
 
-        // GET: Types
+        // GET: Types { Organic, Inorganic, Acid, Base, Corrosive, Toxic }
         public async Task<IActionResult> Index()
         {
+            var AcidContext = _context.Type.Where(s => s.Reagent_Type == ReagentType.Acid).Count();
+            var BaseContext = _context.Type.Where(s => s.Reagent_Type == ReagentType.Base).Count();
+            var InorganicContext = _context.Type.Where(s => s.Reagent_Type == ReagentType.Inorganic).Count();
+            var ToxicContext = _context.Type.Where(s => s.Reagent_Type == ReagentType.Toxic).Count();
+            var OrganicContext = _context.Type.Where(s => s.Reagent_Type == ReagentType.Organic).Count();
+            var CorrosiveContext = _context.Type.Where(s => s.Reagent_Type == ReagentType.Corrosive).Count();
+            ViewBag.ACID = AcidContext;
+            ViewBag.BASE = BaseContext;
+            ViewBag.INORGANIC = InorganicContext;
+            ViewBag.TOXIC = ToxicContext;
+            ViewBag.ORGANIC = OrganicContext;
+            ViewBag.CORROSIVE = CorrosiveContext;
             return View(await _context.Type.ToListAsync());
         }
 
