@@ -10,12 +10,12 @@ namespace Chemical_Management.Controllers
 {
     public class HomeController : Controller
     {
-        private static List<Users> _AppUsers //will move to db soon
+        /*private static List<Users> _AppUsers //will move to db soon
             = new List<Users>() {
             new Users { UserName = "Johnny", Password = "EAD2022", Id = 1, UserType = UserType.Admin},
             new Users { UserName = "Martyna", Password = "MARTYNA", Id = 2, UserType = UserType.Admin},
             new Users { UserName = "StandardUser", Password = "TestUser", Id = 3, UserType = UserType.Standard},
-            };
+            };   */ 
 
         private readonly ILogger<HomeController> _logger;
 
@@ -23,6 +23,8 @@ namespace Chemical_Management.Controllers
         {
             _logger = logger;
         }
+
+       
 
         public IActionResult Index()
         {
@@ -39,7 +41,7 @@ namespace Chemical_Management.Controllers
         {
             return View();
         }
-
+        /*
         [HttpGet("Login")] 
         public IActionResult Login(string returnURL)
         {
@@ -74,6 +76,7 @@ namespace Chemical_Management.Controllers
             await HttpContext.SignOutAsync();
             return Redirect("/");
         }
+        */
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
