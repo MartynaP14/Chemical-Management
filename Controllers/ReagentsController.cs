@@ -57,7 +57,7 @@ namespace Chemical_Management.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReagentID,ReagentName,LotNumber")] Reagent reagent)
+        public async Task<IActionResult> Create([Bind("ReagentID,ReagentName,LotNumber,Type")] Reagent reagent)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace Chemical_Management.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReagentID,ReagentName,LotNumber")] Reagent reagent)
+        public async Task<IActionResult> Edit(int id, [Bind("ReagentID,ReagentName,LotNumber,Type")] Reagent reagent)
         {
             if (id != reagent.ReagentID)
             {

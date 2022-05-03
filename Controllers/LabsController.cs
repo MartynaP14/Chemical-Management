@@ -17,6 +17,7 @@ namespace Chemical_Management.Controllers
         public LabsController(Chemical_ManagementContext context)
         {
             _context = context;
+           _context.Database.EnsureCreated();
         }
 
         // GET: Labs

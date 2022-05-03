@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Chemical_Management.Models
 {
 
-    //public enum ReagentType { Organic, Inorganic, Acid, Base, Corrosive, Toxic } will add type as class so we can have a type controller/views
+    public enum ReagentType { Organic, Inorganic, Acid, Base, Corrosive, Toxic }
 
 
     public class Reagent
@@ -21,8 +21,8 @@ namespace Chemical_Management.Models
         //public string Vendor { get; set; }
 
         public virtual ICollection<Supply> Supplies { get; set; } //represents many side of reagent to supply 
-        public virtual ICollection< Type> Types { get; set; } //represents many side of type to reagent 
-
+        
+        public ReagentType Type { get; set; }
         //Navigation properties for entity framework, to define relationships between tables
         //FK for entity framework
 
