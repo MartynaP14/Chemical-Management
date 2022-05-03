@@ -17,7 +17,7 @@ namespace Chemical_Management.Controllers
         public SuppliesController(Chemical_ManagementContext context)
         {
             _context = context;
-
+            _context.Database.EnsureCreated();
         }
 
         // GET: Supplies

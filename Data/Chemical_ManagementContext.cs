@@ -20,7 +20,7 @@ namespace Chemical_Management.Data
 
         public DbSet<Chemical_Management.Models.Supply> Supply { get; set; }
 
-        public DbSet<Chemical_Management.Models.Type> Type { get; set; }
+        //public DbSet<Chemical_Management.Models.Type> Type { get; set; }
 
         public DbSet<Chemical_Management.Models.Users> Users { get; set; }
     }

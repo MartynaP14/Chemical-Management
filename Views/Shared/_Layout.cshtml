@@ -30,12 +30,6 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Reagents" asp-action="Index">Reagents</a>
                     </li>
                 }
-             @if (User.Identity.IsAuthenticated)
-                {
-                    <li class="nav-item">
-                      <a class="nav-link text-dark" asp-area="" asp-controller="Types" asp-action="Index">Chemical Types</a>
-                    </li>
-                }
              @if (User.Identity.IsAuthenticated) //only display to user when logged in
                 {
                     <li class="nav-item">
