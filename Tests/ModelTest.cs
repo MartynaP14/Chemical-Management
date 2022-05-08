@@ -15,7 +15,7 @@ namespace Chemical_ManagementTests.Tests
         [TestMethod()]
         public void CreateReagent()
         {
-            Reagent r = new Reagent() { ReagentID = 1, ReagentName = HLC, LotNumber = 1002 };
+            Reagent r = new Reagent() { ReagentID = 1, ReagentName = "HLC", LotNumber = 1002 };
             Assert.IsInstanceOfType(r, typeof(Reagent));
             Assert.AreEqual(1, r.ReagentID);
             Assert.AreEqual(r.ReagentName, "HCL");
