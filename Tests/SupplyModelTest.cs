@@ -12,7 +12,7 @@ namespace Chemical_Management.Tests
         {
             Supply TestSupply = new Supply() { SupplyId = 1, ReagentStock=10 };
             
-            Assert.IsInstanceOfType(TestSupply, typeof(Lab));
+            Assert.IsInstanceOfType(TestSupply, typeof(Supply));
 
         }
 
