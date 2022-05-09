@@ -1,5 +1,5 @@
 ﻿using Chemical_Management.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Chemical_ManagementTests.Tests
-{
+{/*
 
     [TestClass()]
     public class ModelTest
@@ -32,4 +32,5 @@ namespace Chemical_ManagementTests.Tests
 
 
     }
+    */
 }
