@@ -6,9 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Chemical_Management</RootNamespace>
   </PropertyGroup>
-
+https://github.com/MartynaP14/Chemical-Management/pull/23/conflict?name=Chemical-Management.csproj&ancestor_oid=ae7ff0fce5836bb73450dcfe7ea56c9cdc4d63ea&base_oid=cee0c4eeaccdb24bf7ef610267bb4927c54df470&head_oid=1d8b73c7e86d181ec7cd69c996293174b6ac3621
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.4" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.4">
