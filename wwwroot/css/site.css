@@ -16,3 +16,13 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+
+.carousel-inner {
+    display: block;
+    width: 80%;
+    overflow: hidden;
+    margin: auto;
+    padding-top: 50px;
+}

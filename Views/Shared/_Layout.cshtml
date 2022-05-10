@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/BootswatchTheme.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Chemical_Management.styles.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/b2c61ed4ff.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
+      <i class="fa-solid fa-house"></i>
     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Chemical_Management</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -51,10 +53,12 @@
       </ul>
     </div>
     
-    <h6><a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Login">Login</a></h6>
+    <i class="fa-solid fa-user-pen"></i>
+    
+    <h6><a class="nav-link text-dark" asp-area="" asp-controller="Users"  asp-action="Login">Login</a></h6>
     @if (User.Identity.IsAuthenticated) //only display to user when logged in
             {
-                <h6><a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Logout">Logout</a></h6>
+                <h6> <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Logout">Logout</a></h6>
             }
    </div> 
 </nav>
