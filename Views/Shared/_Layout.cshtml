@@ -20,48 +20,50 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarColor01">
-        <i class="fa-solid fa-house"></i>
+        
       <ul class="navbar-nav me-auto">
           
         <li class="nav-item">
              
-          <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home
+          <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house"></i>Home
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
              @if (User.Identity.IsAuthenticated) //only display to user when logged in
+
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Reagents" asp-action="Index">Reagents</a>
+                   
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Reagents" asp-action="Index" ><i class="fa-solid fa-flask-vial"></i>Reagents</a>
                     </li>
                 }
              @if (User.Identity.IsAuthenticated) //only display to user when logged in
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Labs" asp-action="Index">Labs</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Labs" asp-action="Index"><i class="fa-solid fa-biohazard"></i>Labs</a>
                     </li>
                 }
             @if (User.Identity.IsAuthenticated) //only display to user when logged in
                 {
                     <li class="nav-item">
-                      <a class="nav-link text-dark" asp-area="" asp-controller="Supplies" asp-action="Index">Supply</a>
+                      <a class="nav-link text-dark" asp-area="" asp-controller="Supplies" asp-action="Index"><i class="fa-solid fa-cubes"></i>Supply</a>
                     </li>
                 }
             @if (User.Identity.IsAuthenticated) //only display to user when logged in
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">User Management</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index"><i class="fa-solid fa-users"></i>User Management</a>
                     </li>
                 }
       </ul>
     </div>
     
-    <i class="fa-solid fa-user-pen"></i>
+   
     
-    <h6><a class="nav-link text-dark" asp-area="" asp-controller="Users"  asp-action="Login">Login</a></h6>
+    <h6><a class="nav-link text-dark" asp-area="" asp-controller="Users"  asp-action="Login"><i class="fa-solid fa-user-pen fa-fw"></i>Login</a></h6>
     @if (User.Identity.IsAuthenticated) //only display to user when logged in
             {
-                <h6> <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Logout">Logout</a></h6>
+                <h6> <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></h6>
             }
    </div> 
 </nav>

@@ -5,13 +5,18 @@
     var returnUrl = ViewData["returnUrl"] as string;
     var error = TempData["Error"] as string;
 }
-<h1> Login page</h1>
+<header>
+    <script src="https://kit.fontawesome.com/b2c61ed4ff.js" crossorigin="anonymous"></script>
+</header>
+<h1> <i class="fa-solid fa-key"></i> Please Log-in</h1>
 @if (!string.IsNullOrEmpty(error))
 {
     <h3><strong class="alert-danger">@error</strong></h3>
 }
+<section class="log-in-form" >
 <form action="/Login?returnUrl=@System.Net.WebUtility.UrlEncode(returnUrl)" method="post">
     <input type="text" name="username" placeholder="Username" />
     <input type="password" name="password" placeholder="Password" />
     <input type="submit" value="login" />
 </form>
+</section>
