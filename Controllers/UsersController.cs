@@ -190,7 +190,8 @@ namespace Chemical_Management.Controllers
                 var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var claimsPrincipal = new ClaimsPrincipal(claimIdentity);
                 await HttpContext.SignInAsync(claimsPrincipal);
-                return Redirect("Home/UserLogin");
+                
+                return Redirect("Home");
             }
             TempData["Error"] = "Error: Username or password is incorrect";
             return View("login"); //returns user to login if password/username is not correct

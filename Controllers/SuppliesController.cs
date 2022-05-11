@@ -159,6 +159,7 @@ namespace Chemical_Management.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
         private bool SupplyExists(int id)
         {
             return _context.Supply.Any(e => e.SupplyId == id);
