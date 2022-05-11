@@ -10,8 +10,11 @@
 {
     <h3><strong class="alert-danger">@error</strong></h3>
 }
+
 <form action="/login?returnUrl=@System.Net.WebUtility.UrlEncode(returnUrl)" method="post">
     <input type="text" name="username" placeholder="Username" />
     <input type="password" name="password" placeholder="Password" />
     <input type="submit" value="login" />
 </form>
+
+

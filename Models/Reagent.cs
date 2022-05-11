@@ -12,9 +12,12 @@ namespace Chemical_Management.Models
         [Key]
         public int ReagentID { get; set; }
         [Required(ErrorMessage = "Please enter Reagent Name")]
+        [Display(Name = "Reagent Name")]
         public string ReagentName { get; set; }
 
-        [Required(ErrorMessage = "Please enter Reagent the lot number")]
+        [Required(ErrorMessage = "Please enter Reagent lot number")]
+        [Display(Name = "Lot number")]
+
         public int LotNumber { get; set; }
 
         //[Required(ErrorMessage = "Please enter Vendor")] not needed vendor id in supply table can connect Reagents and Vendors
