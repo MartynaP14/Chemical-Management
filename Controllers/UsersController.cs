@@ -20,7 +20,7 @@ namespace Chemical_Management.Controllers
             = new List<Users>() {
             new Users { UserName = "Johnny", Password = "EAD2022", Id = 1, UserType = UserType.Admin},
             new Users { UserName = "Martyna", Password = "MARTYNA", Id = 2, UserType = UserType.Admin},
-            new Users { UserName = "StandardUser", Password = "TestUser", Id = 3, UserType = UserType.Standard},
+            new Users { UserName = "Dermot", Password = "Dermot2022!", Id = 3, UserType = UserType.Standard},
             };
 
         private readonly Chemical_ManagementContext _context;
